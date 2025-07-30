@@ -8,8 +8,13 @@ structured, executable task plans using LLM function calling.
 from typing import Dict, Any, List
 import logging
 import json
-from langchain.schema import HumanMessage
-from langchain.chat_models import ChatOpenAI
+try:
+    from langchain.schema import HumanMessage
+    from langchain.chat_models import ChatOpenAI
+except ImportError:
+    # Fallback for different langchain versions
+    from langchain_core.messages import HumanMessage
+    from langchain_openai import ChatOpenAI
 from pydantic import BaseModel
 
 from ..core.state import GraphState, TaskDefinition

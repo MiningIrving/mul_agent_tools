@@ -7,8 +7,13 @@ information into a high-quality, structured response for the user.
 
 from typing import Dict, Any
 import logging
-from langchain.schema import HumanMessage
-from langchain.chat_models import ChatOpenAI
+try:
+    from langchain.schema import HumanMessage
+    from langchain.chat_models import ChatOpenAI
+except ImportError:
+    # Fallback for different langchain versions
+    from langchain_core.messages import HumanMessage
+    from langchain_openai import ChatOpenAI
 
 from ..core.state import GraphState
 
